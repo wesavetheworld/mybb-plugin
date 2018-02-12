@@ -376,7 +376,7 @@ function newpoints_bbscoin($page)
             error($lang->newpoints_bbscoin_withdraw_error);
         }
 
-        $real_price = $amount * 100000000 - 1000000;
+        $real_price = $amount * 100000000 - 50000000;
 
         if ($real_price <= 0) {
             error($lang->newpoints_bbscoin_withdraw_too_low);
@@ -406,8 +406,8 @@ function newpoints_bbscoin($page)
 
         $req_data = array(
           'params' => array(
-              'anonymity' => 0,
-              'fee' => 1000000,
+              'anonymity' => 5,
+              'fee' => 50000000,
               'unlockTime' => 0,
               'changeAddress' => $mybb->settings['newpoints_bbscoin_wallet_address'],
               "transfers" => array(
