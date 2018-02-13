@@ -51,5 +51,6 @@ $l['newpoints_bbscoin_no_enough'] = "Your points is not enough.";
 $l['newpoints_bbscoin_withdraw_succ'] = "Your withdraw is successfully. Transaction Hash is {1}.";
 $l['newpoints_bbscoin_fail'] = "Withdraw failed";
 $l['newpoints_bbscoin_close_withdraw'] = "Withdraw is closed";
+$l['newpoints_bbscoin_points_balance'] = "Your points balance: ";
 
 ?>

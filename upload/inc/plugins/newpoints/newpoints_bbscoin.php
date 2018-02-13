@@ -53,7 +53,7 @@ function newpoints_bbscoin_info()
 		"website"		=> "https://bbscoin.xyz",
 		"author"		=> "BBSCoin Foundation",
 		"authorsite"	=> "https://bbscoin.xyz",
-		"version"		=> "1.0",
+		"version"		=> "1.0.2",
 		"guid" 			=> "",
 		"compatibility" => "*"
 	);
@@ -166,7 +166,7 @@ function newpoints_bbscoin_activate()
 <td class="trow1" width="100%" colspan="2"><strong>{$lang->newpoints_bbscoin_tobbs_desc}{$mybb->settings[\'newpoints_bbscoin_pay_to_coin_ratio\']}</td>
 </tr>
 <tr>
-<td class="trow2" width="50%"><strong>{$lang->newpoints_bbscoin_tobbs_withdraw}:</strong></td>
+<td class="trow2" width="50%"><strong>{$lang->newpoints_bbscoin_tobbs_withdraw}:</strong><br /><span class="smalltext">{$lang->newpoints_bbscoin_points_balance} {$mybb->user[\'newpoints\']}</span> {$lang->newpoints_bbscoin_points}</td>
 <td class="trow2" width="50%"><input type="text" name="amount" id="addcoinamount" onkeyup="addcalcoin()" value="" class="textbox" size="20" /> BBS {$lang->newpoints_bbscoin_tobbs_cacl}  <span id="coin_desamount">0</span> {$lang->newpoints_bbscoin_points}</td>
 </tr>
 <tr>
