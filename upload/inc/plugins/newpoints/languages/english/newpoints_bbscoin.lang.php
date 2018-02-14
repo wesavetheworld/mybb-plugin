@@ -26,31 +26,31 @@
 ****************************************************************************/
 
 $l['newpoints_bbscoin_usercp_nav_name'] = "BBSCoin Exchange";
-$l['newpoints_bbscoin_no_address'] = "Admin have not set the wallet address";
-$l['newpoints_bbscoin_topoint'] = "Deposit Points From BBSCoin";
+$l['newpoints_bbscoin_no_address'] = "Your website admin has not set the wallet address";
+$l['newpoints_bbscoin_topoint'] = "Deposit Points from BBSCoin";
 $l['newpoints_bbscoin_topoint_desc'] = "You can buy Points with BBSCoin. <a href=\"https://bbscoin.xyz\" target=\"_blank\">What's BBSCoin? Click here.</a> The exchange rate is: 1:";
 $l['newpoints_bbscoin_topoint_cacl'] = "You need transfer";
 $l['newpoints_bbscoin_topoint_deposit'] = "Deposit";
 $l['newpoints_bbscoin_topoint_transactionhash'] = "Transaction Hash";
-$l['newpoints_bbscoin_topoint_transactiontips'] = "Please transfer required BBS to the address below, then fill the blank. ";
+$l['newpoints_bbscoin_topoint_transactiontips'] = "Please transfer required BBSCoin to the address below, then fill in the blank. ";
 $l['newpoints_bbscoin_points'] = "Points.";
 $l['newpoints_bbscoin_tobbs'] = "Withdraw BBSCoin";
-$l['newpoints_bbscoin_tobbs_desc'] = "You can withdraw BBSCoin with Points. You will pay the transfer fee. If site's wallet don't have enough balance, withdraw will be failed. The exchange rate is: 1:";
+$l['newpoints_bbscoin_tobbs_desc'] = "You can withdraw BBSCoin with Points. The transaction fee will be paid from the withdrawal amount. The transaction will fail when the website's wallet don't have enough balance. Current exchange rate is: 1:";
 $l['newpoints_bbscoin_tobbs_withdraw'] = "Withdraw";
-$l['newpoints_bbscoin_tobbs_cacl'] = "You need ";
+$l['newpoints_bbscoin_tobbs_cacl'] = "You'll need ";
 $l['newpoints_bbscoin_tobbs_address'] = "Wallet Address ";
-$l['newpoints_bbscoin_tobbs_address_desc'] = "Please input your wallet Address ";
-$l['newpoints_bbscoin_least'] = "You need 1 Points at least";
-$l['newpoints_bbscoin_cc'] = "Please don't submit frequently";
-$l['newpoints_bbscoin_used'] = "This transaction hash is used";
-$l['newpoints_bbscoin_notconfirmed'] = "Your transaction should have {1} confirmed at least. Please wait some minutes and try again.";
-$l['newpoints_bbscoin_succ'] = "Your is deposit successfully";
-$l['newpoints_bbscoin_amount_error'] = "Deposit amount incorrect";
-$l['newpoints_bbscoin_withdraw_too_low'] = "After deducting the transfer fee, the BBSCoin withdrawal amount is less than 0.";
-$l['newpoints_bbscoin_no_enough'] = "Your points is not enough.";
-$l['newpoints_bbscoin_withdraw_succ'] = "Your withdraw is successfully. Transaction Hash is {1}.";
+$l['newpoints_bbscoin_tobbs_address_desc'] = "Please input your wallet address ";
+$l['newpoints_bbscoin_least'] = "You need to have at least 1 Point";
+$l['newpoints_bbscoin_cc'] = "Please don't submit too frequently";
+$l['newpoints_bbscoin_used'] = "This transaction hash has been used.";
+$l['newpoints_bbscoin_notconfirmed'] = "Your transaction should have at least {1} confirmations. Please wait and try again.";
+$l['newpoints_bbscoin_succ'] = "Your deposit is successful";
+$l['newpoints_bbscoin_amount_error'] = "Deposit amount is incorrect";
+$l['newpoints_bbscoin_withdraw_too_low'] = "After deducting the transaction fee, the withdrawal amount is less than 0 BBS.";
+$l['newpoints_bbscoin_no_enough'] = "Your Points are not enough.";
+$l['newpoints_bbscoin_withdraw_succ'] = "Your withdraw is successful. The transaction hash is {1}.";
 $l['newpoints_bbscoin_fail'] = "Withdraw failed";
 $l['newpoints_bbscoin_close_withdraw'] = "Withdraw is closed";
-$l['newpoints_bbscoin_points_balance'] = "Your points balance: ";
+$l['newpoints_bbscoin_points_balance'] = "Your Points balance is: ";
 
 ?>
