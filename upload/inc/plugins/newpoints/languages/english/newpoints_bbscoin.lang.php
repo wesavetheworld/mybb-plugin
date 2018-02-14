@@ -52,5 +52,6 @@ $l['newpoints_bbscoin_withdraw_succ'] = "Your withdraw is successful. The transa
 $l['newpoints_bbscoin_fail'] = "Withdraw failed";
 $l['newpoints_bbscoin_close_withdraw'] = "Withdraw is closed";
 $l['newpoints_bbscoin_points_balance'] = "Your Points balance is: ";
+$l['newpoints_bbscoin_withdraw_error'] = "Your wallet address is incorrect";
 
 ?>
