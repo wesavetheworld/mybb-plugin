@@ -53,7 +53,7 @@ function newpoints_bbscoin_info()
 		"website"		=> "https://bbscoin.xyz",
 		"author"		=> "BBSCoin Foundation",
 		"authorsite"	=> "https://bbscoin.xyz",
-		"version"		=> "1.0.2",
+		"version"		=> "1.0.3",
 		"guid" 			=> "",
 		"compatibility" => "*"
 	);
