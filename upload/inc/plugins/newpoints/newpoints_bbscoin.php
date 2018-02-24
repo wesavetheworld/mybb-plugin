@@ -53,7 +53,7 @@ function newpoints_bbscoin_info()
 		"website"		=> "https://bbscoin.xyz",
 		"author"		=> "BBSCoin Foundation",
 		"authorsite"	=> "https://bbscoin.xyz",
-		"version"		=> "1.0.3",
+		"version"		=> "1.1.0",
 		"guid" 			=> "",
 		"compatibility" => "*"
 	);
@@ -89,8 +89,10 @@ function newpoints_bbscoin_activate()
 	newpoints_add_setting('newpoints_bbscoin_pay_to_coin_ratio', 'newpoints_bbscoin', 'BBSCoin <- Point', 'Point To BBSCoin Exchange Rate', 'text', "10", 2);
 	newpoints_add_setting('newpoints_bbscoin_pay_to_bbscoin', 'newpoints_bbscoin', 'Withdraw BBSCoin', 'Allow get BBSCoin by points', 'yesno', 1, 3);
 	newpoints_add_setting('newpoints_bbscoin_wallet_address', 'newpoints_bbscoin', 'Site BBSCoin Wallet', 'Your wallet address to receive BBSCoin', 'text', '', 4);
-	newpoints_add_setting('newpoints_bbscoin_walletd', 'newpoints_bbscoin', 'Walletd Service URL', 'Your walletd service url', 'text', 'http://127.0.0.1:8070/json_rpc', 5);
+	newpoints_add_setting('newpoints_bbscoin_walletd', 'newpoints_bbscoin', 'Walletd Service URL', 'Your walletd or online service url', 'text', 'http://127.0.0.1:8070/json_rpc', 5);
 	newpoints_add_setting('newpoints_bbscoin_confirmed_blocks', 'newpoints_bbscoin', 'Transfer Required Confirmed Blocks', 'The confirmation number of transaction', 'text', '3', 6);
+	newpoints_add_setting('newpoints_bbscoin_siteid', 'newpoints_bbscoin', 'BBSCoin Online Wallet Site Id', 'Your Online Wallet Site Id (Walletd do not need to be filled in)', 'text', '', 7);
+	newpoints_add_setting('newpoints_bbscoin_sitekey', 'newpoints_bbscoin', 'BBSCoin Online Wallet Site Key', 'Your Online Wallet Site Key (Walletd do not need to be filled in)', 'text', '', 8);
 	rebuild_settings();
 	global $db;
 	$collation = $db->build_create_table_collation();
@@ -209,7 +211,7 @@ function newpoints_bbscoin_deactivate()
 {
 	global $db, $mybb;
 	// delete settings
-	newpoints_remove_settings("'newpoints_bbscoin_pay_ratio','newpoints_bbscoin_pay_to_coin_ratio','newpoints_bbscoin_pay_to_bbscoin','newpoints_bbscoin_wallet_address','newpoints_bbscoin_walletd','newpoints_bbscoin_confirmed_blocks'");
+	newpoints_remove_settings("'newpoints_bbscoin_pay_ratio','newpoints_bbscoin_pay_to_coin_ratio','newpoints_bbscoin_pay_to_bbscoin','newpoints_bbscoin_wallet_address','newpoints_bbscoin_walletd','newpoints_bbscoin_confirmed_blocks','newpoints_bbscoin_siteid','newpoints_bbscoin_sitekey'");
 	rebuild_settings();
 }
 
@@ -228,6 +230,10 @@ function newpoints_bbscoin($page)
 	if (!$mybb->user['uid']) {
 		return;	
 	}
+
+    if ($mybb->settings['newpoints_bbscoin_siteid'] && $mybb->settings['newpoints_bbscoin_sitekey']) {
+        BBSCoinApi::setSiteInfo($mybb->settings['newpoints_bbscoin_siteid'], $mybb->settings['newpoints_bbscoin_sitekey']);
+    }
 
 	if ($mybb->input['action'] == "bbscoin")
 	{
@@ -416,8 +422,29 @@ function newpoints_bbscoin($page)
 
 class BBSCoinApi {
 
+    private static $online_api_site_id  = '';
+    private static $online_api_site_key = '';
+
+    // Set Site Info
+    public static function setSiteInfo($site_id, $site_key) {
+        self::$online_api_site_id = $site_id;
+        self::$online_api_site_key = $site_key;
+    }
+
+    // Send Request
     public static function getUrlContent($url, $data_string) {
         $ch = curl_init();
+
+        if (self::$online_api_site_id && self::$online_api_site_key) {
+            $sign = self::sign($data_string);
+            $url_suff = 'site_id='.self::$online_api_site_id.'&sign='.$sign['sign'].'&ts='.$sign['ts'];
+            if (strpos($url, '?') === false) {
+                $url .= '?'.$url_suff;
+            } else {
+                $url .= '&'.$url_suff;
+            }
+        }
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_USERAGENT, 'BBSCoin');
         curl_setopt($ch, CURLOPT_POST, true);
@@ -431,6 +458,17 @@ class BBSCoinApi {
         return $data;
     }
 
+    // Generate Sign
+    public static function sign($data_string) {
+        $ts = time();
+        $sign = hash_hmac('sha256', $data_string.$ts, self::$online_api_site_key);
+        return array(
+            'sign' => $sign,
+            'ts' => $ts
+        );
+    }
+
+    // Send Transaction
     public static function sendTransaction($walletd, $address, $real_price, $sendto) {
         $req_data = array(
           'params' => array(
@@ -455,6 +493,7 @@ class BBSCoinApi {
         return $rsp_data;
     }
 
+    // Get Status
     public static function getStatus($walletd) {
         $status_req_data = array(
           "jsonrpc" => "2.0",
@@ -466,6 +505,7 @@ class BBSCoinApi {
         return $status_rsp_data;
     }
 
+    // Get Transaction
     public static function getTransaction($walletd, $transaction_hash) {
         $req_data = array(
           "params" => array(
