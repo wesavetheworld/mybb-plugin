@@ -66,10 +66,6 @@ function newpoints_bbscoin_uninstall()
 	$collation = $db->build_create_table_collation();
 
 	// drop tables
-	if($db->table_exists("newpoints_bbscoin_orders"))
-    {
-        $db->drop_table('newpoints_bbscoin_orders');
-	}
 	if($db->table_exists("newpoints_bbscoin_locks"))
     {
         $db->drop_table('newpoints_bbscoin_locks');
